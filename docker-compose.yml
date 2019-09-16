@@ -1,0 +1,59 @@
+version: '3.1'
+services:
+  rabbitmq:
+    image: rabbitmq:3-alpine
+    ports:
+      - 15672:15672
+      - 5673:5672
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_NODE_PORT: ${RABBITMQ_NODE_PORT}
+    healthcheck:
+      test: ['CMD', 'rabbitmqctl', 'status']
+      interval: 30s
+      timeout: 15s
+      retries: 3
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 30s
+      timeout: 15s
+      retries: 3
+  app-celery-worker:
+    # build:
+    #   context: .
+    #   dockerfile: docker/app/Dockerfile
+    image: flask-celery-rabbitmq-example-app:latest
+    command: ['app-celery-worker']
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      CACHE_REDIS_URL: ${CACHE_REDIS_URL}
+      SESSION_TYPE: ${SESSION_TYPE}
+      SESSION_REDIS_URL: ${SESSION_REDIS_URL}
+    depends_on:
+      - rabbitmq
+      - redis
+  app:
+    # build:
+    #   context: .
+    #   dockerfile: docker/app/Dockerfile
+    image: flask-celery-rabbitmq-example-app:latest
+    command: ['app']
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      CACHE_REDIS_URL: ${CACHE_REDIS_URL}
+      SESSION_TYPE: ${SESSION_TYPE}
+      SESSION_REDIS_URL: ${SESSION_REDIS_URL}
+    ports:
+      - '5000:5000'
+    depends_on:
+      - rabbitmq
+      - redis
+      - app-celery-worker
