@@ -3,10 +3,9 @@ services:
   rabbitmq:
     image: rabbitmq:3-alpine
     ports:
-      - 15672:15672
-      - 5673:5672
+      - '15672:15672'
+      - '5673:5672'
     environment:
-      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
       RABBITMQ_NODE_PORT: ${RABBITMQ_NODE_PORT}
@@ -18,7 +17,7 @@ services:
   redis:
     image: redis:5-alpine
     ports:
-      - 6379:6379
+      - '6379:6379'
     healthcheck:
       test: ['CMD', 'redis-cli', 'ping']
       interval: 30s

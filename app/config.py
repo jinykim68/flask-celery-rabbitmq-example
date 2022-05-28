@@ -4,6 +4,8 @@ import redis
 
 
 class Config:
+    API_TITLE = 'Test API'
+    API_VERSION = 'v1'
     OPENAPI_VERSION = os.environ.get('OPENAPI_VERSION', '3.0.2')
     SECRET_KEY = os.environ.get('SECRET_KEY', 'test_secret_key')
     CACHE_REDIS_URL = os.environ.get('CACHE_REDIS_URL')

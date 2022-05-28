@@ -3,7 +3,7 @@ import logging
 from celery import Celery
 from dynaconf.contrib import FlaskDynaconf
 from flask import Flask
-from flask_rest_api import Api
+from flask_smorest import Api
 
 from app.ext import (cache, session, socket_io)
 
@@ -52,7 +52,7 @@ def create_app(config_module):
 
     # init SocketIO
     if not app.config.CELERY_BROKER_URL:
-        logging.warn(
+        logging.warning(
             """app.config.CELERY_BROKER_URL is not set. """
             """SocketIO may not work with Celery workers now.""")
 

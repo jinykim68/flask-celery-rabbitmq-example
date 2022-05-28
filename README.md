@@ -10,16 +10,16 @@ A simple **Flask** application using **RabbitMQ**, **Redis**, **Celery**, **Flas
 
 ### Environment variables
 
-| Variable                 | Description                                                               |
-| ------------------------ | ------------------------------------------------------------------------- |
-| `RABBITMQ_ERLANG_COOKIE` | Set a consistent cookie (useful for clustering) for **RabbitMQ**          |
-| `RABBITMQ_DEFAULT_USER`  | Set a default username for **RabbitMQ**                                   |
-| `RABBITMQ_DEFAULT_PASS`  | Set a default username's password for **RabbitMQ**                        |
-| `RABBITMQ_NODE_PORT`     | Set a port number of RabbitMQ node (e.g., *5672*)                         |
-| `CELERY_BROKER_URL`      | Set a location of the broker instance (i.e., **RabbitMQ URL**)            |
-| `CELERY_RESULT_BACKEND`  | Set a location of result store (i.e., **Redis URL**)                      |
-| `SESSION_TYPE`           | Set a type of server-side session store (i.e., **"redis"**)               |
-| `SESSION_REDIS_URL`      | Set a location of server-side session store (i.e., **Redis URL**)         |
+| Variable                | Description                                                         |
+|-------------------------|---------------------------------------------------------------------|
+| `RABBITMQ_DEFAULT_USER` | Set the default username for **RabbitMQ**                           |
+| `RABBITMQ_DEFAULT_PASS` | Set the default username's password for **RabbitMQ**                |
+| `RABBITMQ_NODE_PORT`    | Set the port number of RabbitMQ node (e.g., *5672*)                 |
+| `CELERY_BROKER_URL`     | Set the location of the broker instance (i.e., **RabbitMQ URL**)    |
+| `CELERY_RESULT_BACKEND` | Set the location of result store (i.e., **Redis URL**)              |
+| `CACHE_REDIS_URL`       | Set the location of cache store (i.e., **Redis URL**)               |
+| `SESSION_TYPE`          | Set the type of server-side session store (i.e., **"redis"**)       |
+| `SESSION_REDIS_URL`     | Set the location of server-side session store (i.e., **Redis URL**) |
 
 ### Installing
 
